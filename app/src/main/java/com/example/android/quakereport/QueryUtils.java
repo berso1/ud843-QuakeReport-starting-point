@@ -50,11 +50,12 @@ public final class QueryUtils {
             JSONArray features = root.getJSONArray("features");
             for( int i = 0; i < features.length(); i++){
                 JSONObject earthquake = features.getJSONObject(i);
-                String mag   = earthquake.getJSONObject("properties").getString("mag");
+                double mag   = earthquake.getJSONObject("properties").getDouble("mag");
                 String place = earthquake.getJSONObject("properties").getString("place");
-                String time  = earthquake.getJSONObject("properties").getString("time");
+                Long time  = earthquake.getJSONObject("properties").getLong("time");
+                String url = earthquake.getJSONObject("properties").getString("url");
 
-                earthquakes.add(new Earthquake(mag,place,time));
+                earthquakes.add(new Earthquake(mag,place,time,url));
             }
 
         } catch (JSONException e) {
