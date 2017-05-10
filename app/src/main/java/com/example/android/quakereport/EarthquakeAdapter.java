@@ -128,9 +128,7 @@ public class EarthquakeAdapter extends ArrayAdapter<Earthquake> {
         if (place.contains("of")) {
             int indexOf = place.indexOf(" of ") + 3;
             offset = place.substring(0, indexOf);
-            Log.v("getOffset place :", place);
-            Log.v("getOffset indexOf :", "" + indexOf);
-            Log.v("getOffset offset :", offset);
+
         }
         return offset;
     }

@@ -11,10 +11,10 @@ public class Earthquake {
     private long mDate;
     private String mUrl;
 
-    public Earthquake(double magnitude, String place, long eQdate, String url){
+    public Earthquake(double magnitude, String place, long date, String url){
         mMagnitude = magnitude;
         mPlace     = place;
-        mDate      = eQdate;
+        mDate      = date;
         mUrl       = url;
     }
 
