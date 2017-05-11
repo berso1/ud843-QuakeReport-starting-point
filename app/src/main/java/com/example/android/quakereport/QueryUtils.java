@@ -1,5 +1,6 @@
 package com.example.android.quakereport;
 
+import android.net.ConnectivityManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -39,6 +40,8 @@ public final class QueryUtils {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
+
+
 
         // Create URL object
         URL url = createUrl(requestUrl);
