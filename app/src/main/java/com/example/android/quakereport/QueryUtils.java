@@ -1,6 +1,5 @@
 package com.example.android.quakereport;
 
-import android.net.ConnectivityManager;
 import android.text.TextUtils;
 import android.util.Log;
 
@@ -35,14 +34,6 @@ public final class QueryUtils {
      */
     public static List<Earthquake> fetchEarthquakeData(String requestUrl) {
 
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-
-
         // Create URL object
         URL url = createUrl(requestUrl);
 
@@ -55,10 +46,8 @@ public final class QueryUtils {
         }
 
         // Extract relevant fields from the JSON response and create an {@link Event} object
-         List<Earthquake> earthquakes = extractFeatureFromJson(jsonResponse);
-
         // Return the {@link Event}
-        return earthquakes;
+        return extractFeatureFromJson(jsonResponse);
     }
 
     /**
@@ -74,8 +63,8 @@ public final class QueryUtils {
         try {
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
-            urlConnection.setReadTimeout(10000 /* milliseconds */);
-            urlConnection.setConnectTimeout(15000 /* milliseconds */);
+            urlConnection.setReadTimeout(15 * 1000 /* milliseconds */);
+            urlConnection.setConnectTimeout(15 * 1000 /* milliseconds */);
             urlConnection.connect();
             if( urlConnection.getResponseCode() == 200) {
                 inputStream = urlConnection.getInputStream();
@@ -94,6 +83,7 @@ public final class QueryUtils {
                 inputStream.close();
             }
         }
+
         return jsonResponse;
     }
 
@@ -151,7 +141,7 @@ public final class QueryUtils {
                     Long time  = earthquake.getJSONObject("properties").getLong("time");
                     String url = earthquake.getJSONObject("properties").getString("url");
 
-                   // Log.v(LOG_TAG + "mag,place,time,url",mag+","+place+","+time+","+url);
+
 
                     earthquakes.add(new Earthquake(mag,place,time,url));
                 }
